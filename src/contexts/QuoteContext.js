@@ -17,12 +17,12 @@ export const QuoteProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   function getBookmarksfromLocalStorage() {
-    let bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
-    if (bookmarks) {
-      setBookmarkedQuotes([]);
+    setBookmarkedQuotes([]);
+    if (localStorage.getItem("bookmarks") !== null) {
+      const ids = JSON.parse(localStorage.getItem("bookmarks"));
       let temp = [];
-      bookmarks.forEach((id) => {
-        axios.get(`${BackendBaseUrl}/quotes/${id}`).then((res) => {
+      ids.forEach(async (id) => {
+        await axios.get(`${BackendBaseUrl}/quotes/${id}`).then((res) => {
           temp.push(res.data);
           setBookmarkedQuotes(temp);
         });

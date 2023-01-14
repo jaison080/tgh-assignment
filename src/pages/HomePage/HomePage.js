@@ -52,8 +52,9 @@ function HomePage() {
           data-aos="fade-up"
           onClick={() => {
             if (tag && tag !== "None") {
-              getRandomQuotebyTag(tag);
-              setTag("None");
+              getRandomQuotebyTag(tag).then(() => {
+                setTag("None");
+              });
             }
             getRandomQuote();
           }}
