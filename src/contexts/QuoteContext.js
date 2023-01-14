@@ -16,20 +16,40 @@ export const QuoteProvider = ({ children }) => {
     getBookmarksfromLocalStorage();
   }, []);
   function getBookmarksfromLocalStorage() {
-    const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
-    if (bookmarks) {
-      setBookmarkedQuotes(bookmarks);
+    if (localStorage.getItem("bookmarks") !== null) {
+      const ids = JSON.parse(localStorage.getItem("bookmarks"));
+      let temp=[];
+      ids.forEach((id) => {
+        axios.get(`${BackendBaseUrl}/quotes/${id}`).then((res) => {
+          temp.push(res.data);
+          setBookmarkedQuotes(temp);
+        });
+      });
     }
   }
   function addBookmark(quote) {
-    const newBookmarks = [...bookmarkedQuotes, quote];
-    setBookmarkedQuotes(newBookmarks);
-    localStorage.setItem("bookmarks", JSON.stringify(newBookmarks));
+    localStorage.setItem(
+      "bookmarks",
+      JSON.stringify(
+        [...bookmarkedQuotes, quote].map(function (obj) {
+          return obj._id;
+        })
+      )
+    );
+    getBookmarksfromLocalStorage();
   }
   function removeBookmark(id) {
-    const newBookmarks = bookmarkedQuotes.filter((quote) => quote._id !== id);
-    setBookmarkedQuotes(newBookmarks);
-    localStorage.setItem("bookmarks", JSON.stringify(newBookmarks));
+    localStorage.setItem(
+      "bookmarks",
+      JSON.stringify(
+        bookmarkedQuotes
+          .filter((quote) => quote._id !== id)
+          .map(function (obj) {
+            return obj._id;
+          })
+      )
+    );
+    getBookmarksfromLocalStorage();
   }
   async function getRandomQuote() {
     await axios.get(`${BackendBaseUrl}/random`).then((res) => {
