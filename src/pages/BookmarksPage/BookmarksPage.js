@@ -15,7 +15,6 @@ function BookmarksPage() {
       </>
     );
   }
-
   return (
     <>
       <CustomTitle title="Bookmarks" />

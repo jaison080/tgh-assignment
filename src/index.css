@@ -17,3 +17,10 @@ option
 {
   font-family: "Poppins";
 }
+button
+{
+  font-family: "Poppins";
+  outline: none;
+  box-shadow: none ;
+  border: none;
+}

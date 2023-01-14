@@ -27,10 +27,17 @@ function HomePage() {
       <CustomTitle title="Home" />
       <div className="homepage__container">
         <QuoteCard quote={quote} />
-        <div>
+        <div className="homepage__container"
+        data-aos="fade-up"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}>
           <select
             className="homepage__container_select"
-            data-aos="fade-up"
+            
             value={tag}
             onChange={(e) => {
               setTag(e.target.value);
@@ -44,12 +51,10 @@ function HomePage() {
               );
             })}
 
-            <option value={"None"}>{"None"}</option>
+            <option value={"None"}>{"Any"}</option>
           </select>
-        </div>
-        <div
+        <button
           className="homepage__container_button"
-          data-aos="fade-up"
           onClick={() => {
             if (tag && tag !== "None") {
               getRandomQuotebyTag(tag).then(() => {
@@ -60,6 +65,8 @@ function HomePage() {
           }}
         >
           Next Quote
+        </button>
+
         </div>
       </div>
     </>
