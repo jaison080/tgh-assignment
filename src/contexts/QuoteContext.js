@@ -14,12 +14,14 @@ export const QuoteProvider = ({ children }) => {
     getRandomQuote();
     getTags();
     getBookmarksfromLocalStorage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   function getBookmarksfromLocalStorage() {
-    if (localStorage.getItem("bookmarks") !== null) {
-      const ids = JSON.parse(localStorage.getItem("bookmarks"));
-      let temp=[];
-      ids.forEach((id) => {
+    let bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+    if (bookmarks) {
+      setBookmarkedQuotes([]);
+      let temp = [];
+      bookmarks.forEach((id) => {
         axios.get(`${BackendBaseUrl}/quotes/${id}`).then((res) => {
           temp.push(res.data);
           setBookmarkedQuotes(temp);
@@ -31,12 +33,13 @@ export const QuoteProvider = ({ children }) => {
     localStorage.setItem(
       "bookmarks",
       JSON.stringify(
-        [...bookmarkedQuotes, quote].map(function (obj) {
+        [quote, ...bookmarkedQuotes].map(function (obj) {
           return obj._id;
         })
       )
     );
     getBookmarksfromLocalStorage();
+    getRandomQuote();
   }
   function removeBookmark(id) {
     localStorage.setItem(

@@ -1,12 +1,20 @@
 import React, { useContext } from "react";
-import { BookmarkedCard } from "../../components";
+import { BookmarkedCard, Loader } from "../../components";
 import { QuoteContext } from "../../contexts/QuoteContext";
 import "../../components/QuoteCard/QuoteCard.css";
 import "./BookmarksPage.css";
 import { CustomTitle } from "../../utils";
 
 function BookmarksPage() {
-  const { bookmarkedQuotes } = useContext(QuoteContext);
+  const { bookmarkedQuotes, loading } = useContext(QuoteContext);
+  if (!loading) {
+    return (
+      <>
+        <CustomTitle title="Bookmarks" />
+        <Loader />
+      </>
+    );
+  }
   if (bookmarkedQuotes.length === 0) {
     return (
       <>
@@ -23,9 +31,15 @@ function BookmarksPage() {
     <>
       <CustomTitle title="Bookmarks" />
       <div className="bookmarkspage__container">
-        {bookmarkedQuotes.map((data) => {
-          return <BookmarkedCard quote={data} key={data._id} />;
-        })}
+        {bookmarkedQuotes.length === 0 ? (
+          <div className="quote__container_quote" data-aos="fade-up">
+            No Bookmarks
+          </div>
+        ) : (
+          bookmarkedQuotes.map((data) => {
+            return <BookmarkedCard quote={data} key={data._id} />;
+          })
+        )}
       </div>
     </>
   );
