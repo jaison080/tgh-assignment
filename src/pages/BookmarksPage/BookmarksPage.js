@@ -15,18 +15,7 @@ function BookmarksPage() {
       </>
     );
   }
-  if (bookmarkedQuotes.length === 0) {
-    return (
-      <>
-        <CustomTitle title="Bookmarks" />
-        <div className="bookmarkspage__container">
-          <div className="quote__container_quote" data-aos="fade-up">
-            No Bookmarks
-          </div>
-        </div>
-      </>
-    );
-  }
+
   return (
     <>
       <CustomTitle title="Bookmarks" />
