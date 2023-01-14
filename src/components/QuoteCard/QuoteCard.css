@@ -1,0 +1,50 @@
+.quote__container {
+  width: 70vw;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: #d05252;
+  row-gap: 3rem;
+  border-radius: 30px;
+  color: white;
+  margin: 2rem;
+}
+.quote__container_quote {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  color: white;
+}
+.quote__container_author {
+  text-align: center;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 38px;
+}
+.quote__container_bookmark {
+  font-weight: 700;
+  font-size: 25px;
+  float: right;
+  line-height: 38px;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .quote__container {
+    padding: 2rem;
+    row-gap: 2rem;
+  }
+  .quote__container_quote {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .quote__container_author {
+    font-size: 15px;
+    line-height: 25px;
+  }
+  .quote__container_bookmark {
+    font-size: 20px;
+    line-height: 25px;
+    margin-top: 1rem;
+  }
+}

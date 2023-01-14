@@ -1,0 +1,21 @@
+.navbar__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2rem;
+}
+.navbar__container_navbar_item {
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 60px;
+  color: #ffffff;
+  text-decoration: none;
+}
+.navbar__container_navbar_item_active{
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 60px;
+  color: #ffffff;
+  text-decoration: none;
+}
